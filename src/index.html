@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de PIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html, body { height: 100%; margin: 0; font-family: 'Inter', sans-serif; overflow: hidden; }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1f2937, #111827); /* bg-gray-800 to bg-gray-900 */
+            perspective: 1000px; /* Para animaciones 3D sutiles */
+        }
+        .pin-outer-container {
+            /* Para centrar y permitir que el pin-container se mueva sin afectar el fondo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .pin-container {
+            background-color: rgba(31, 41, 55, 0.85); /* bg-gray-800 con transparencia */
+            backdrop-filter: blur(10px); /* Efecto glassmorphism */
+            padding: 2.5rem; /* Aumentado */
+            border-radius: 1rem; /* Más redondeado */
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2), 0 10px 10px -5px rgba(0,0,0,0.1);
+            width: 380px; /* Aumentado */
+            text-align: center;
+            animation: fadeInScaleUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            transform-style: preserve-3d; /* Para animaciones 3D */
+            border: 1px solid rgba(75, 85, 99, 0.5); /* Borde sutil */
+        }
+
+        @keyframes fadeInScaleUp {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px) rotateX(-10deg); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem auto;
+            background-color: #4f46e5; /* Indigo-600 */
+            border-radius: 1.5rem; /* Más redondeado */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .greeting-text {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 0.5rem;
+            color: #e5e7eb; /* gray-200 */
+            animation: textFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.5s both;
+        }
+        
+        @keyframes textFocusIn {
+          0% {
+            filter: blur(12px);
+            opacity: 0;
+          }
+          100% {
+            filter: blur(0px);
+            opacity: 1;
+          }
+        }
+
+        #pinInput {
+            text-align: center;
+            font-size: 1.5rem; /* Más grande */
+            letter-spacing: 0.5em; /* Espaciado entre números */
+            padding: 0.75rem;
+            background-color: rgba(55, 65, 81, 0.7); /* bg-gray-700 con transparencia */
+            border: 1px solid rgba(75, 85, 99, 0.7); /* gray-600 */
+        }
+        #pinInput:focus {
+            box-shadow: 0 0 0 2px #4f46e5; /* Indigo-600 */
+        }
+
+        .submit-button {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+        .submit-button:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            animation: fadeIn 1s ease-out 1.2s backwards; /* Delay fadeIn */
+        }
+        .social-links a {
+            color: #9ca3af; /* gray-400 */
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #e5e7eb; /* gray-200 */
+            transform: scale(1.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animación de error */
+        .animate-shake {
+            animation: shakeHorizontal 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shakeHorizontal {
+            10%, 90% { transform: translateX(-1px); }
+            20%, 80% { transform: translateX(2px); }
+            30%, 50%, 70% { transform: translateX(-4px); }
+            40%, 60% { transform: translateX(4px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="pin-outer-container">
+        <div class="pin-container text-white">
+            <div class="app-icon">
+                <i class="fas fa-shield-alt"></i> </div>
+            <h1 class="greeting-text">¡Hola de nuevo Gael!</h1>
+            <p class="text-center text-gray-400 mb-6" data-lang-key="pinPrompt">Introduce tu PIN para continuar</p>
+            <form id="pinForm" class="space-y-6">
+                <div>
+                    <input type="password" id="pinInput" name="pinInput" maxlength="4"
+                           class="block w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-md text-white shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           autocomplete="off" required>
+                </div>
+                <button type="submit"
+                        class="submit-button w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800">
+                    Acceder
+                </button>
+            </form>
+            <p id="pinMessage" class="mt-4 text-center text-sm text-red-400"></p>
+
+            <div class="social-links">
+                <a href="#" id="githubLink" title="GitHub @gaelestabaocupado" class="github-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" id="discordLink" title="Discord" class="discord-icon">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pequeño script para manejar los enlaces externos y la animación de error
+        document.addEventListener('DOMContentLoaded', () => {
+            const pinForm = document.getElementById('pinForm');
+            const pinInput = document.getElementById('pinInput');
+            const pinMessage = document.getElementById('pinMessage');
+            const pinContainer = document.querySelector('.pin-container');
+
+            pinInput.focus();
+
+            pinForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const pin = pinInput.value;
+                const result = await window.electronAPI.verifyPin(pin);
+                if (result.success) {
+                    // La ventana se cerrará desde main.js
+                } else {
+                    pinMessage.textContent = result.message || 'PIN incorrecto.';
+                    pinInput.value = '';
+                    pinInput.focus();
+                    if (pinContainer) {
+                        pinContainer.classList.add('animate-shake');
+                        setTimeout(() => pinContainer.classList.remove('animate-shake'), 500);
+                    }
+                }
+            });
+
+            const githubLink = document.getElementById('githubLink');
+            if (githubLink) {
+                githubLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.electronAPI.openExternalLink('https://github.com/gaelbloqueado');
+                });
+            }
+
+            const discordLink = document.getElementById('discordLink');
+            if (discordLink) {
+                discordLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.electronAPI.openExternalLink('https://discord.com/users/gaelbloqueado1');
+                });
+            }
+        });
+    </script>
+    </body>
+</html>

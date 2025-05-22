@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="appTitle">Mi Gestor de Contraseñas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="sidebar flex flex-col p-4 space-y-4 border-r">
+        <div class="sidebar-header flex items-center justify-between pb-3 border-b border-color">
+            <div class="flex items-center space-x-2">
+                <img id="userImage" src="../assets/imagen.png" alt="User Image" class="user-avatar rounded-full">
+                <h2 class="text-md font-semibold text-primary">@gaelestabaocupado</h2>
+                <span class="verification-badge">
+                    <i class="fas fa-check-circle text-blue-500"></i>
+                </span>
+            </div>
+            <button id="toggleSettingsBtn" data-lang-key-title="toggleSettingsTitle" title="Ajustes" class="p-1 rounded-md hover-icon">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+
+        <div id="settingsPanel" class="hidden pt-3 space-y-3">
+            <h2 class="px-1 text-xs font-semibold uppercase text-muted tracking-wider" data-lang-key="settingsTitle">Ajustes</h2>
+            <div>
+                <label for="themeSelector" class="block text-sm font-medium text-secondary" data-lang-key="themeLabel">Tema:</label>
+                <select id="themeSelector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base input-bg border-color focus:outline-none focus:ring-2 focus:ring-accent sm:text-sm rounded-md input-text">
+                    <option value="dark" data-lang-key="themeDark">Oscuro</option>
+                    <option value="red" data-lang-key="themeRed">Rojo</option>
+                    <option value="blue" data-lang-key="themeBlue">Azul</option>
+                </select>
+            </div>
+            <div>
+                <label for="languageSelector" class="block text-sm font-medium text-secondary" data-lang-key="languageLabel">Idioma:</label>
+                <select id="languageSelector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base input-bg border-color focus:outline-none focus:ring-2 focus:ring-accent sm:text-sm rounded-md input-text">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+            <h1 class="text-xl font-semibold" data-lang-key="passwordsMainTitle">Contraseñas</h1>
+            <button id="addPasswordBtn" data-lang-key-title="addPasswordBtnTitle" title="Añadir nueva contraseña" class="p-2 rounded-md hover-icon">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="relative">
+            <input type="text" id="searchInput" data-lang-key-placeholder="searchPlaceholder" placeholder="Buscar..." class="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 input-bg input-text placeholder-text">
+            <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-muted"></i>
+        </div>
+        <nav id="passwordListContainer" class="flex-grow overflow-y-auto space-y-1 pr-1">
+            </nav>
+        <div class="mt-auto"> <button id="generatePasswordSidebarBtn" class="w-full text-sm btn-secondary py-2 px-4 rounded-md flex items-center justify-center">
+                <i class="fas fa-key mr-2"></i><span data-lang-key="generatePasswordBtn">Generador</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content p-6 overflow-y-auto">
+        <div id="emptyState" class="text-center py-10">
+            <i class="fas fa-lock text-5xl text-muted mb-4"></i>
+            <h2 class="text-2xl font-semibold text-secondary" data-lang-key="emptyStateTitle">Selecciona o crea una entrada</h2>
+            <p class="text-muted" data-lang-key="emptyStateSubtitle">Tus detalles de contraseña aparecerán aquí.</p>
+        </div>
+
+        <div id="detailsView" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                <div class="flex items-center gap-3">
+                    <h2 id="detailsSiteName" class="text-3xl font-bold text-primary"></h2>
+                    <span id="detailsCategoryTag" class="category-tag text-xs font-semibold px-2.5 py-0.5 rounded-full"></span>
+                </div>
+                <div class="flex-shrink-0">
+                    <button id="editPasswordBtn" data-lang-key-title="editBtnTitle" title="Editar" class="p-2 rounded-md hover-icon"><i class="fas fa-edit"></i></button>
+                    <button id="deletePasswordBtn" data-lang-key-title="deleteBtnTitle" title="Eliminar" class="p-2 rounded-md text-red-500 hover:text-red-400 hover-icon-danger"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-secondary" data-lang-key="usernameLabel">Usuario:</label>
+                    <div class="mt-1 flex items-center">
+                        <p id="detailsUsername" class="text-lg p-2 input-bg rounded-md flex-grow mr-2 text-primary truncate"></p>
+                        <button id="copyUsernameBtn" data-lang-key-title="copyUsernameBtnTitle" title="Copiar usuario" class="p-2 rounded-md hover-icon flex-shrink-0"><i class="fas fa-copy"></i></button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-secondary" data-lang-key="passwordLabel">Contraseña:</label>
+                    <div class="mt-1 flex items-center">
+                        <input type="password" id="detailsPassword" readonly class="text-lg p-2 input-bg rounded-md flex-grow mr-2 border-none text-primary">
+                        <button id="togglePasswordVisibilityBtn" data-lang-key-title="togglePasswordVisibilityBtnTitle" title="Mostrar/Ocultar contraseña" class="p-2 rounded-md hover-icon flex-shrink-0"><i class="fas fa-eye"></i></button>
+                        <button id="copyPasswordBtn" data-lang-key-title="copyPasswordBtnTitle" title="Copiar contraseña" class="p-2 rounded-md hover-icon ml-1 flex-shrink-0"><i class="fas fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-secondary" data-lang-key="notesLabel">Notas:</label>
+                <div id="detailsNotes" class="mt-1 text-sm p-3 input-bg rounded-md min-h-[80px] whitespace-pre-wrap text-primary overflow-y-auto max-h-40"></div>
+            </div>
+             <div class="text-xs text-muted space-y-0.5">
+                <p><span data-lang-key="categoryLabel">Categoría:</span> <span id="detailsCategoryText"></span></p>
+                <p><span data-lang-key="createdLabel">Creado:</span> <span id="detailsCreatedAt"></span></p>
+                <p><span data-lang-key="modifiedLabel">Modificado:</span> <span id="detailsUpdatedAt"></span></p>
+            </div>
+        </div>
+    </main>
+
+    <div id="passwordModal" class="fixed inset-0 modal-backdrop flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-content p-6 rounded-lg shadow-xl w-full max-w-md space-y-4">
+            <h3 id="modalTitle" class="text-xl font-semibold text-primary" data-lang-key="addPasswordModalTitle">Añadir Nueva Contraseña</h3>
+            <form id="passwordForm">
+                <input type="hidden" id="passwordId">
+                <div>
+                    <label for="siteNameInput" class="block text-sm font-medium text-secondary" data-lang-key="siteNameModalLabel">Nombre del Sitio/App:</label>
+                    <input type="text" id="siteNameInput" required class="mt-1 block w-full px-3 py-2 input-bg border border-color rounded-md text-primary shadow-sm focus:outline-none focus:ring-accent focus:border-accent">
+                </div>
+                <div>
+                    <label for="usernameInput" class="block text-sm font-medium text-secondary" data-lang-key="usernameModalLabel">Usuario/Email:</label>
+                    <input type="text" id="usernameInput" required class="mt-1 block w-full px-3 py-2 input-bg border border-color rounded-md text-primary shadow-sm focus:outline-none focus:ring-accent focus:border-accent">
+                </div>
+                <div>
+                    <label for="passwordInput" class="block text-sm font-medium text-secondary" data-lang-key="passwordModalLabel">Contraseña:</label>
+                    <div class="relative">
+                        <input type="password" id="passwordInput" required class="mt-1 block w-full px-3 py-2 input-bg border border-color rounded-md text-primary shadow-sm focus:outline-none focus:ring-accent focus:border-accent">
+                        <button type="button" id="generateInModalBtn" data-lang-key-title="generateBtnTitle" title="Generar contraseña" class="absolute inset-y-0 right-0 px-3 flex items-center text-sm text-accent-lighter hover:text-accent">
+                            <i class="fas fa-key"></i>
+                        </button>
+                    </div>
+                    <div class="mt-1 text-xs text-secondary password-strength">
+                        <span data-lang-key="strengthLabel">Fortaleza:</span>
+                        <span id="strengthBar1"></span><span id="strengthBar2"></span><span id="strengthBar3"></span>
+                        <span id="strengthText" class="ml-2"></span>
+                    </div>
+                </div>
+                <div>
+                    <label for="categorySelect" class="block text-sm font-medium text-secondary" data-lang-key="categoryModalLabel">Categoría:</label>
+                    <select id="categorySelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base input-bg border-color focus:outline-none focus:ring-accent focus:border-accent sm:text-sm rounded-md input-text">
+                        <option value="" data-lang-key="categorySelectDefault">-- Seleccionar --</option>
+                        <option value="Juegos" data-lang-key="categoryGames">Juegos</option>
+                        <option value="Redes Sociales" data-lang-key="categorySocial">Redes Sociales</option>
+                        <option value="Personal" data-lang-key="categoryPersonal">Personal</option>
+                        <option value="Pagina Web" data-lang-key="categoryWebsite">Página Web</option>
+                        <option value="Otros" data-lang-key="categoryOther">Otros</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="notesInput" class="block text-sm font-medium text-secondary" data-lang-key="notesModalLabel">Notas (opcional):</label>
+                    <textarea id="notesInput" rows="3" class="mt-1 block w-full px-3 py-2 input-bg border border-color rounded-md text-primary shadow-sm focus:outline-none focus:ring-accent focus:border-accent"></textarea>
+                </div>
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" id="cancelModalBtn" class="px-4 py-2 text-sm font-medium btn-secondary rounded-md" data-lang-key="cancelBtn">Cancelar</button>
+                    <button type="submit" id="saveModalBtn" class="px-4 py-2 text-sm font-medium btn-primary rounded-md" data-lang-key="saveBtn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="generatorModal" class="fixed inset-0 modal-backdrop flex items-center justify-center p-4 hidden z-50">
+        <div class="modal-content p-6 rounded-lg shadow-xl w-full max-w-md space-y-4 text-primary">
+            <h3 class="text-xl font-semibold" data-lang-key="passwordGeneratorTitle">Generador de Contraseñas</h3>
+            <div>
+                <label for="generatedPasswordOutput" class="block text-sm font-medium text-secondary" data-lang-key="generatedPasswordLabel">Contraseña Generada:</label>
+                <div class="mt-1 flex">
+                    <input type="text" id="generatedPasswordOutput" readonly class="flex-grow px-3 py-2 input-bg border-color rounded-l-md text-primary">
+                    <button id="copyGeneratedPasswordBtn" data-lang-key-title="copyGeneratedPasswordBtnTitle" title="Copiar contraseña generada" class="px-3 py-2 btn-primary-lighter text-primary rounded-r-md"><i class="fas fa-copy"></i></button>
+                </div>
+            </div>
+            <div>
+                <label for="passwordLengthInput" class="block text-sm font-medium text-secondary" data-lang-key="lengthLabel">Longitud: <span id="passwordLengthValue">16</span></label>
+                <input type="range" id="passwordLengthInput" min="8" max="64" value="16" class="w-full h-2 input-bg-lighter rounded-lg appearance-none cursor-pointer range-accent">
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <label class="flex items-center space-x-2"><input type="checkbox" id="uppercaseCb" checked class="form-checkbox h-4 w-4 checkbox-accent bg-tertiary border-color rounded"><span data-lang-key="uppercaseLabel">Mayúsculas (A-Z)</span></label>
+                <label class="flex items-center space-x-2"><input type="checkbox" id="lowercaseCb" checked class="form-checkbox h-4 w-4 checkbox-accent bg-tertiary border-color rounded"><span data-lang-key="lowercaseLabel">Minúsculas (a-z)</span></label>
+                <label class="flex items-center space-x-2"><input type="checkbox" id="numbersCb" checked class="form-checkbox h-4 w-4 checkbox-accent bg-tertiary border-color rounded"><span data-lang-key="numbersLabel">Números (0-9)</span></label>
+                <label class="flex items-center space-x-2"><input type="checkbox" id="symbolsCb" checked class="form-checkbox h-4 w-4 checkbox-accent bg-tertiary border-color rounded"><span data-lang-key="symbolsLabel">Símbolos (!@#...)</span></label>
+            </div>
+            <div class="flex justify-between items-center pt-2">
+                 <button type="button" id="regeneratePasswordBtn" class="px-4 py-2 text-sm font-medium btn-success rounded-md">
+                    <i class="fas fa-sync-alt mr-1"></i> <span data-lang-key="regenerateBtn">Regenerar</span>
+                </button>
+                <div>
+                    <button type="button" id="cancelGeneratorModalBtn" class="px-4 py-2 text-sm font-medium btn-secondary rounded-md mr-2" data-lang-key="closeBtn">Cerrar</button>
+                    <button type="button" id="useGeneratedPasswordBtn" class="px-4 py-2 text-sm font-medium btn-primary rounded-md" data-lang-key="usePasswordBtn">Usar Contraseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastNotification" class="fixed bottom-5 right-5 py-2 px-4 rounded-lg shadow-md hidden z-[70] text-white">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

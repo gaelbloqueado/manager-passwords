@@ -1,0 +1,38 @@
+{
+  "name": "pass",
+  "version": "1.0.0",
+  "description": "gestor de contraseñas",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "author": "gds",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^36.2.1",
+    "electron-rebuild": "^3.2.9",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0"
+  },
+  "build": {
+    "appId": "com.gds.pass",
+    "productName": "Pass",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

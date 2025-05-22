@@ -1,0 +1,319 @@
+/* src/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    /* Colores base (Tema Oscuro por defecto con degradado) */
+    --primary-bg-start: #0c0f14;
+    --primary-bg-end: #1a1f29;
+    --primary-bg: linear-gradient(180deg, var(--primary-bg-start) 0%, var(--primary-bg-end) 100%);
+    
+    --secondary-bg-start: #1f2937;
+    --secondary-bg-end: #2c3646;
+    --secondary-bg: linear-gradient(180deg, var(--secondary-bg-start) 0%, var(--secondary-bg-end) 100%);
+    
+    --tertiary-bg: #374151;
+    --hover-bg: #4b5563;
+    --input-bg: var(--tertiary-bg);
+    --input-text: #e5e7eb;
+    --placeholder-text: #9ca3af;
+
+    --text-primary: #d1d5db;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --text-on-accent: white;
+
+    --border-color: #4b5563;
+    --ring-color: #4f46e5;
+
+    --accent-color: #4f46e5;
+    --accent-hover-color: #4338ca;
+    --accent-lighter: #6366f1;
+
+    --selected-item-bg: var(--accent-color);
+    --selected-item-text: var(--text-on-accent);
+
+    --modal-backdrop-color: rgba(0,0,0,0.75);
+    --modal-content-bg: var(--secondary-bg-start);
+
+    --icon-color: var(--text-secondary);
+    --icon-hover-color: var(--text-primary);
+    --icon-danger-color: #f87171;
+    --icon-danger-hover-color: #ef4444;
+
+    --scrollbar-track-bg: var(--primary-bg-start);
+    --scrollbar-thumb-bg: var(--tertiary-bg);
+    --scrollbar-thumb-hover-bg: var(--hover-bg);
+
+    --range-track-bg: var(--tertiary-bg);
+    --range-thumb-bg: var(--accent-color);
+
+    --checkbox-accent: var(--accent-color);
+
+    --btn-primary-bg: var(--accent-color);
+    --btn-primary-hover-bg: var(--accent-hover-color);
+    --btn-primary-text: var(--text-on-accent);
+
+    --btn-secondary-bg: var(--tertiary-bg);
+    --btn-secondary-hover-bg: var(--hover-bg);
+    --btn-secondary-text: var(--text-primary);
+
+    --btn-success-bg: #16a34a;
+    --btn-success-hover-bg: #15803d;
+    --btn-success-text: white;
+
+    --strength-weak-color: #ef4444;
+    --strength-medium-color: #f59e0b;
+    --strength-strong-color: #22c55e;
+
+    --category-tag-juegos-bg: #059669;
+    --category-tag-juegos-text: #ecfdf5;
+    --category-tag-redes-sociales-bg: #2563eb;
+    --category-tag-redes-sociales-text: #eff6ff;
+    --category-tag-personal-bg: #ca8a04;
+    --category-tag-personal-text: #fefce8;
+    --category-tag-pagina-web-bg: #db2777;
+    --category-tag-pagina-web-text: #fdf2f8;
+    --category-tag-otros-bg: #6b7280;
+    --category-tag-otros-text: #f3f4f6;
+    --category-tag-default-bg: var(--tertiary-bg);
+    --category-tag-default-text: var(--text-secondary);
+
+    --verification-badge-color: #3b82f6; /* Tailwind blue-500 */
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--primary-bg);
+    color: var(--text-primary);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track-bg); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb-bg); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover-bg); }
+
+/* Inputs, Selects, Textareas */
+.input-bg { background-color: var(--input-bg); }
+.input-text { color: var(--input-text); }
+.placeholder-text::placeholder { color: var(--placeholder-text); }
+select { color: var(--input-text); }
+select option { background-color: var(--input-bg); color: var(--input-text); }
+input[type="range"].range-accent { accent-color: var(--range-thumb-bg); }
+input[type="range"].range-accent::-webkit-slider-runnable-track { background: var(--range-track-bg); }
+input[type="range"].range-accent::-moz-range-track { background: var(--range-track-bg); }
+
+.form-checkbox.checkbox-accent:checked {
+    background-color: var(--checkbox-accent);
+    border-color: var(--checkbox-accent);
+}
+.form-checkbox.bg-tertiary { background-color: var(--tertiary-bg); }
+
+
+/* Sidebar */
+.sidebar {
+    background: var(--secondary-bg);
+    border-right-color: var(--border-color);
+}
+.sidebar .text-muted { color: var(--text-muted); }
+.sidebar .text-secondary { color: var(--text-secondary); }
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.user-avatar {
+    width: 32px; /* Tailwind w-8 */
+    height: 32px; /* Tailwind h-8 */
+    object-fit: cover; /* Ensure image covers the area nicely */
+}
+.verification-badge {
+    font-size: 0.9rem; /* Ajusta según sea necesario */
+    line-height: 1; /* Para alinear mejor el ícono */
+    color: var(--verification-badge-color);
+}
+.verification-badge .fa-check-circle { /* Para el ícono específico de Font Awesome */
+    vertical-align: middle; /* Puede ayudar con la alineación */
+}
+
+/* Settings Panel (toggled by JS) */
+#settingsPanel {
+    border-bottom: 1px solid var(--border-color); /* Add a separator when open */
+    margin-bottom: 0.75rem; /* space-y-3 in parent, add margin if needed */
+    padding-bottom: 0.75rem;
+}
+
+
+/* Main Content */
+.main-content .text-primary { color: var(--text-primary); }
+.main-content .text-secondary { color: var(--text-secondary); }
+.main-content .text-muted { color: var(--text-muted); }
+
+/* Password List & Category Headers */
+.category-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 0.5rem 0.25rem;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.category-header:first-child {
+    margin-top: 0;
+}
+
+/* Password Item */
+.password-item { transition: background-color 0.15s ease-in-out; }
+.password-item:hover { background-color: var(--hover-bg); }
+.password-item.selected { background-color: var(--selected-item-bg) !important; color: var(--selected-item-text) !important; }
+.password-item.selected h3, .password-item.selected p { color: var(--selected-item-text) !important; }
+
+/* Buttons */
+.btn-primary { background-color: var(--btn-primary-bg); color: var(--btn-primary-text); }
+.btn-primary:hover { background-color: var(--btn-primary-hover-bg); }
+.btn-secondary { background-color: var(--btn-secondary-bg); color: var(--btn-secondary-text); }
+.btn-secondary:hover { background-color: var(--btn-secondary-hover-bg); }
+.btn-success { background-color: var(--btn-success-bg); color: var(--btn-success-text); }
+.btn-success:hover { background-color: var(--btn-success-hover-bg); }
+
+/* Icons */
+.hover-icon { color: var(--icon-color); }
+.hover-icon:hover { color: var(--icon-hover-color); }
+.hover-icon-danger { color: var(--icon-danger-color); }
+.hover-icon-danger:hover { color: var(--icon-danger-hover-color); }
+.text-accent { color: var(--accent-color); }
+.text-accent-lighter { color: var(--accent-lighter); }
+.focus\:ring-accent:focus { --tw-ring-color: var(--ring-color) !important; }
+.focus\:border-accent:focus { border-color: var(--accent-color) !important; }
+.border-color { border-color: var(--border-color); }
+
+
+/* Modal */
+.modal-backdrop { background-color: var(--modal-backdrop-color); }
+.modal-content { background: var(--modal-content-bg); }
+
+/* Password Strength Meter */
+.password-strength span { display: inline-block; height: 8px; margin-right: 2px; border-radius: 2px; transition: background-color 0.3s; }
+.strength-weak { background-color: var(--strength-weak-color); }
+.strength-medium { background-color: var(--strength-medium-color); }
+.strength-strong { background-color: var(--strength-strong-color); }
+#strengthText.text-red-500 { color: var(--strength-weak-color); }
+#strengthText.text-amber-500 { color: var(--strength-medium-color); }
+#strengthText.text-green-500 { color: var(--strength-strong-color); }
+
+/* Toast Notification */
+#toastNotification { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; }
+#toastNotification.hidden { opacity: 0; transform: translateY(20px); }
+.toast-success { background-color: var(--btn-success-bg); color: var(--btn-success-text); }
+.toast-error { background-color: var(--strength-weak-color); color: white; }
+.toast-info { background-color: #3b82f6; color: white; }
+
+/* Category Tag in Details View */
+.category-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    line-height: 1.2;
+}
+.category-tag-juegos { background-color: var(--category-tag-juegos-bg); color: var(--category-tag-juegos-text); }
+.category-tag-redes-sociales { background-color: var(--category-tag-redes-sociales-bg); color: var(--category-tag-redes-sociales-text); }
+.category-tag-personal { background-color: var(--category-tag-personal-bg); color: var(--category-tag-personal-text); }
+.category-tag-pagina-web { background-color: var(--category-tag-pagina-web-bg); color: var(--category-tag-pagina-web-text); }
+.category-tag-otros { background-color: var(--category-tag-otros-bg); color: var(--category-tag-otros-text); }
+.category-tag-default { background-color: var(--category-tag-default-bg); color: var(--category-tag-default-text); }
+
+
+body.theme-red {
+    --primary-bg-start: #3f0707;
+    --primary-bg-end: #5c1111;
+    --secondary-bg-start: #7f1d1d;
+    --secondary-bg-end: #991b1b;
+    --tertiary-bg: #b91c1c;
+    --hover-bg: #991b1b;
+    --input-bg: #7f1d1d;
+    --input-text: #fee2e2;
+    --placeholder-text: #fca5a5;
+    --text-primary: #fee2e2;
+    --text-secondary: #fecaca;
+    --text-muted: #fca5a5;
+    --text-on-accent: #fee2e2;
+    --border-color: #991b1b;
+    --ring-color: #f87171;
+    --accent-color: #ef4444;
+    --accent-hover-color: #dc2626;
+    --accent-lighter: #f87171;
+    --selected-item-bg: var(--accent-color);
+    --selected-item-text: #fee2e2;
+    --modal-content-bg: var(--secondary-bg-start);
+    --icon-danger-color: #fde047;
+    --icon-danger-hover-color: #facc15;
+    --scrollbar-track-bg: var(--primary-bg-start);
+    --scrollbar-thumb-bg: var(--tertiary-bg);
+    --scrollbar-thumb-hover-bg: #dc2626;
+    --range-track-bg: var(--secondary-bg-start);
+    --range-thumb-bg: var(--accent-lighter);
+    --checkbox-accent: var(--accent-lighter);
+    --btn-primary-bg: var(--accent-color);
+    --btn-primary-hover-bg: var(--accent-hover-color);
+    --btn-primary-text: #fee2e2;
+    --btn-secondary-bg: #991b1b;
+    --btn-secondary-hover-bg: #7f1d1d;
+    --btn-secondary-text: var(--text-primary);
+    --btn-success-bg: #65a30d;
+    --btn-success-hover-bg: #4d7c0f;
+    --verification-badge-color: #f87171; /* Red accent for badge in red theme */
+}
+
+body.theme-blue {
+    --primary-bg-start: #172554;
+    --primary-bg-end: #1e3a8a;
+    --secondary-bg-start: #1e40af;
+    --secondary-bg-end: #1d4ed8;
+    --tertiary-bg: #2563eb;
+    --hover-bg: #1d4ed8;
+    --input-bg: #1e40af;
+    --input-text: #dbeafe;
+    --placeholder-text: #93c5fd;
+    --text-primary: #dbeafe;
+    --text-secondary: #bfdbfe;
+    --text-muted: #93c5fd;
+    --text-on-accent: #dbeafe;
+    --border-color: #1d4ed8;
+    --ring-color: #60a5fa;
+    --accent-color: #3b82f6;
+    --accent-hover-color: #2563eb;
+    --accent-lighter: #60a5fa;
+    --selected-item-bg: var(--accent-color);
+    --selected-item-text: #dbeafe;
+    --modal-content-bg: var(--secondary-bg-start);
+    --icon-danger-color: #f87171;
+    --icon-danger-hover-color: #ef4444;
+    --scrollbar-track-bg: var(--primary-bg-start);
+    --scrollbar-thumb-bg: var(--tertiary-bg);
+    --scrollbar-thumb-hover-bg: #3b82f6;
+    --range-track-bg: var(--secondary-bg-start);
+    --range-thumb-bg: var(--accent-lighter);
+    --checkbox-accent: var(--accent-lighter);
+    --btn-primary-bg: var(--accent-color);
+    --btn-primary-hover-bg: var(--accent-hover-color);
+    --btn-primary-text: #dbeafe;
+    --btn-secondary-bg: #1d4ed8;
+    --btn-secondary-hover-bg: #1e40af;
+    --btn-secondary-text: var(--text-primary);
+    --btn-success-bg: #16a34a;
+    --btn-success-hover-bg: #15803d;
+    --verification-badge-color: #60a5fa; /* Lighter blue accent for badge in blue theme */
+}
+
+#detailsPassword.text-lg { -webkit-text-security: disc; }
+#detailsPassword[type="text"].text-lg { -webkit-text-security: none; }
