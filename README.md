@@ -69,10 +69,9 @@ Sigue estos pasos para ejecutar la aplicación en tu entorno local.
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
-    cd tu-repositorio
+    git clone https://github.com/gaelbloqueado/manager-passwords
+    cd manager-passwords
     ```
-    *(Reemplaza `tu-usuario/tu-repositorio` con la URL real de tu repositorio)*
 
 2.  **Instala las dependencias:**
     ```bash
