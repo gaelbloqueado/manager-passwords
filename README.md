@@ -1,6 +1,7 @@
 # 🔒 Mi Gestor de Contraseñas Personalizado
 
-![[Imagen de la App Gestor de Contraseñas]](https://placehold.co/700x350/1f2937/d1d5db?text=Pantallazo+Principal+de+la+App&font=Inter)
+!![imagen](https://github.com/user-attachments/assets/8a8f6369-d844-4b26-ab15-300971e92ed9)
+
 *<p align="center">Un gestor de contraseñas de escritorio seguro y personalizable construido con Electron.</p>*
 
 ---
