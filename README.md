@@ -1,6 +1,6 @@
 # 🔒 Mi Gestor de Contraseñas Personalizado
 
-!![imagen](https://github.com/user-attachments/assets/8a8f6369-d844-4b26-ab15-300971e92ed9)
+![imagen](https://github.com/user-attachments/assets/8a8f6369-d844-4b26-ab15-300971e92ed9)
 
 *<p align="center">Un gestor de contraseñas de escritorio seguro y personalizable construido con Electron.</p>*
 
@@ -41,7 +41,8 @@
 
 | Pantalla de PIN Mejorada                                 | Vista Principal (Tema Oscuro)                               | Modal de Añadir Contraseña                               |
 | :-------------------------------------------------------: | :----------------------------------------------------------: | :-------------------------------------------------------: |
-| ![[Pantalla de PIN]](https://placehold.co/450x500/111827/e5e7eb?text=Login+Screen&font=Inter) | ![[Vista Principal]](https://placehold.co/800x600/111827/d1d5db?text=App+Dashboard&font=Inter) | ![[Modal Añadir]](https://placehold.co/450x550/1f2937/e5e7eb?text=Add+Password+Modal&font=Inter) |
+| ![imagen](https://github.com/user-attachments/assets/fde30bf0-85d3-49ab-af88-11caa8f83fbf)
+ | ![[Vista Principal]](https://placehold.co/800x600/111827/d1d5db?text=App+Dashboard&font=Inter) | ![[Modal Añadir]](https://placehold.co/450x550/1f2937/e5e7eb?text=Add+Password+Modal&font=Inter) |
 
 ---
 
