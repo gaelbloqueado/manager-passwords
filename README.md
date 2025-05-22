@@ -37,12 +37,12 @@
 
 ## 🖼️ Vistazos de la Aplicación
 
-*(Aquí puedes añadir más capturas de pantalla o un GIF mostrando la aplicación en acción)*
-
 | Pantalla de PIN Mejorada                                 | Vista Principal (Tema Oscuro)                               | Modal de Añadir Contraseña                               |
 | :-------------------------------------------------------: | :----------------------------------------------------------: | :-------------------------------------------------------: |
 | ![imagen](https://github.com/user-attachments/assets/fde30bf0-85d3-49ab-af88-11caa8f83fbf)
- | ![[Vista Principal]](https://placehold.co/800x600/111827/d1d5db?text=App+Dashboard&font=Inter) | ![[Modal Añadir]](https://placehold.co/450x550/1f2937/e5e7eb?text=Add+Password+Modal&font=Inter) |
+ | ![imagen](https://github.com/user-attachments/assets/16fe6808-9395-4001-ac45-2d81c55c0614)
+ | ![imagen](https://github.com/user-attachments/assets/390ea72d-53f7-48d4-b75d-46bb1f944846)
+ |
 
 ---
 
