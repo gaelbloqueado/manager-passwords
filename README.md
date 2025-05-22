@@ -89,13 +89,11 @@ Sigue estos pasos para ejecutar la aplicación en tu entorno local.
 
 Este proyecto fue desarrollado como una herramienta de aprendizaje y demostración. **NO SE RECOMIENDA PARA ALMACENAR CONTRASEÑAS REALES Y SENSIBLES en su estado actual** por las siguientes razones:
 
-* **PIN Fijo:** La versión actual utiliza un PIN codificado (`0000`) para el acceso. En una aplicación real, esto debería ser una contraseña maestra robusta y única definida por el usuario.
-* **Derivación de Clave Simplificada:** La clave de cifrado se deriva del PIN fijo. Una contraseña maestra fuerte y un algoritmo de derivación de clave robusto (como Argon2id o PBKDF2 con una sal única) son esenciales para una seguridad adecuada.
-* **Falta de Auditorías:** El código no ha sido sometido a auditorías de seguridad profesionales.
+* El PIN (0000) está codificado.
+* El cifrado es básico (clave fija).
+* No ha sido auditado profesionalmente.
 
 Si deseas utilizar un gestor de contraseñas para tus credenciales importantes, por favor, considera soluciones de código abierto auditadas y bien establecidas o servicios comerciales de confianza.
-
-**Este proyecto es excelente para aprender sobre Electron, bases de datos locales, cifrado básico y desarrollo de UI, pero úsalo con precaución.**
 
 ## 👤 Autor
 
