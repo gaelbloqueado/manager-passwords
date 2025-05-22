@@ -99,31 +99,16 @@ Si deseas utilizar un gestor de contraseñas para tus credenciales importantes, 
 
 **Este proyecto es excelente para aprender sobre Electron, bases de datos locales, cifrado básico y desarrollo de UI, pero úsalo con precaución.**
 
----
-
-## ✨ Posibles Mejoras Futuras
-
-* Implementar una contraseña maestra robusta en lugar del PIN fijo.
-* Usar Argon2id o PBKDF2 para la derivación de la clave de cifrado.
-* Autobloqueo de la aplicación después de un período de inactividad.
-* Opción para generar copias de seguridad cifradas.
-* Importar/Exportar contraseñas (en formato cifrado).
-* Comprobación de contraseñas comprometidas (integración con Have I Been Pwned?).
-* Más opciones de personalización y campos para las entradas.
-
----
-
 ## 👤 Autor
 
 * **@gaelestabaocupado**
-    * GitHub: [https://github.com/gaelestabaocupado](https://github.com/gaelestabaocupado)
+    * GitHub: [https://github.com/gaelestabaocupado](https://github.com/gaelbloqueado)
+    * Discord: [https://discord.com/users/gaelbloqueado1](https://discord.com/users/gaelbloqueado1)
     * ¡Conéctate conmigo!
 
 ---
 
 ## 📄 Licencia
-
-*(Puedes añadir una licencia aquí, por ejemplo, MIT License. Si no, puedes eliminar esta sección o poner "Propietario")*
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
