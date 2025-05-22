@@ -37,12 +37,9 @@
 
 ## 🖼️ Vistazos de la Aplicación
 
-| Pantalla de PIN Mejorada                                 | Vista Principal (Tema Oscuro)                               | Modal de Añadir Contraseña                               |
-| :-------------------------------------------------------: | :----------------------------------------------------------: | :-------------------------------------------------------: |
-| ![imagen](https://github.com/user-attachments/assets/fde30bf0-85d3-49ab-af88-11caa8f83fbf)
- | ![imagen](https://github.com/user-attachments/assets/16fe6808-9395-4001-ac45-2d81c55c0614)
- | ![imagen](https://github.com/user-attachments/assets/390ea72d-53f7-48d4-b75d-46bb1f944846)
- |
+| Pantalla de PIN Mejorada | Vista Principal (Tema Oscuro) | Modal de Añadir Contraseña |
+|:------------------------:|:-----------------------------:|:---------------------------:|
+| ![PIN](https://github.com/user-attachments/assets/fde30bf0-85d3-49ab-af88-11caa8f83fbf) | ![Principal](https://github.com/user-attachments/assets/16fe6808-9395-4001-ac45-2d81c55c0614) | ![Modal](https://github.com/user-attachments/assets/390ea72d-53f7-48d4-b75d-46bb1f944846) |
 
 ---
 
