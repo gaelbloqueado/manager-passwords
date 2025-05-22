@@ -79,7 +79,7 @@ Sigue estos pasos para ejecutar la aplicación en tu entorno local.
 
 3.  **Inicia la aplicación:**
     ```bash
-    npm start
+    npm run start
     ```
     La aplicación debería iniciarse y mostrar la pantalla de verificación de PIN. El PIN por defecto es `0000`.
 
